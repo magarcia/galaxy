@@ -6,7 +6,7 @@ if [ $EUID != 0 ]; then
     exit $?
 fi
 
-apt install jq unzip git
+apt install jq unzip git libnss-mdns
 
 curl -s -L https://github.com/magarcia/galaxy/archive/master.zip -o master.zip
 unzip -qq master.zip
