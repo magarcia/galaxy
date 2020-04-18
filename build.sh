@@ -39,7 +39,7 @@ chown --recursive nomad:nomad /var/nomad
 ## Node Exporter
 useradd -rs /bin/false node_exporter
 cp -r ./etc/sysconfig /etc/
-mkdir -p /var/nomad
+mkdir -p /var/node_exporter
 chown --recursive node_exporter:node_exporter /var/node_exporter
 chown node_exporter:node_exporter node_exporter
 mv ./node_exporter /usr/local/bin/
