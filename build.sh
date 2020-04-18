@@ -6,7 +6,11 @@ if [ $EUID != 0 ]; then
     exit $?
 fi
 
-apt install jq unzip
+apt install jq unzip git
+
+curl -s -L https://github.com/magarcia/galaxy/archive/master.zip -o master.zip
+unzip -qq master.zip
+cd galaxy-master/
 
 # Download tools
 ./download/nomad.sh
@@ -55,8 +59,5 @@ systemctl start nomad
 systemctl enable node_exporter
 systemctl start node_exporter
 
-
-
-systemctl status consul
-systemctl status nomad
-systemctl status node_exporter
+cd ..
+rm -r master.zip galaxy-master

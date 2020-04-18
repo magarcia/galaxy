@@ -1,4 +1,0 @@
-
-```
-apt install jq unzip
-```
