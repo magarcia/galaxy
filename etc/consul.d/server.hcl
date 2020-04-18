@@ -6,3 +6,4 @@ enable_syslog = true
 data_dir = "/var/consul"
 retry_join = ["sun.local", "node1.local", "node2.local", "node3.local"]
 ui = true
+advertise_addr = "{{ GetInterfaceIP \"eth0\" }}"
