@@ -17,6 +17,7 @@ cd galaxy-master/
 ./download/nomad.sh
 ./download/consul.sh
 ./download/node_exporter.sh
+./download/vault.sh
 
 # Setup applications
 mkdir -p /usr/local/bin
@@ -30,6 +31,15 @@ mv ./consul /usr/local/bin/
 chmod 640 /etc/consul.d/*
 chown --recursive consul:consul /var/consul
 chown --recursive consul:consul /etc/consul.d
+
+## Vault
+cp -r ./etc/vault.d /etc/
+useradd --system --home /etc/vault.d --shell /bin/false vault
+chown vault:vault vault
+mv ./vault /usr/local/bin/
+setcap cap_ipc_lock=+ep /usr/local/bin/vault
+chmod 640 /etc/vault.d/*
+chown --recursive vault:vault /etc/consul.d
 
 ## Nomad
 cp -r ./etc/nomad.d /etc/
@@ -51,10 +61,14 @@ mv ./node_exporter /usr/local/bin/
 # Start services
 
 cp -r ./etc/systemd/* /etc/systemd/
+systemctl daemon-reload
 
 ## Consul
 systemctl enable consul
 systemctl start consul
+## Vault
+systemctl enable vault
+systemctl start vault
 ## Nomad
 systemctl enable nomad
 systemctl start nomad
