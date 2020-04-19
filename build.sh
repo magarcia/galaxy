@@ -6,6 +6,7 @@ if [ $EUID != 0 ]; then
     exit $?
 fi
 
+apt update
 apt install jq unzip git libnss-mdns
 
 curl -s -L https://github.com/magarcia/galaxy/archive/master.zip -o master.zip
@@ -28,6 +29,7 @@ chown consul:consul consul
 mv ./consul /usr/local/bin/
 chmod 640 /etc/consul.d/*
 chown --recursive consul:consul /var/consul
+chown --recursive consul:consul /etc/consul.d
 
 ## Nomad
 cp -r ./etc/nomad.d /etc/
@@ -35,6 +37,7 @@ mkdir -p /var/nomad
 mv ./nomad /usr/local/bin/
 chmod 640 /etc/nomad.d
 chown --recursive nomad:nomad /var/nomad
+chown --recursive nomad:nomad /etc/nomad.d
 
 ## Node Exporter
 useradd -rs /bin/false node_exporter
