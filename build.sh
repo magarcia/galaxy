@@ -7,7 +7,7 @@ if [ $EUID != 0 ]; then
 fi
 
 apt update
-apt install jq unzip git libnss-mdns
+apt install jq unzip git libnss-mdns avahi-utils
 
 curl -s -L https://github.com/magarcia/galaxy/archive/master.zip -o master.zip
 unzip -qq master.zip
