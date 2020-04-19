@@ -9,7 +9,8 @@ fi
 apt update
 apt install jq unzip git libnss-mdns avahi-utils
 
-curl -s -L https://github.com/magarcia/galaxy/archive/master.zip -o master.zip
+curl -s -L https://github.com/magarcia/galaxy/archive/master.zip -o /tmp/master.zip
+cd /tmp
 unzip -qq master.zip
 cd galaxy-master/
 
@@ -39,7 +40,7 @@ chown vault:vault vault
 mv ./vault /usr/local/bin/
 setcap cap_ipc_lock=+ep /usr/local/bin/vault
 chmod 640 /etc/vault.d/*
-chown --recursive vault:vault /etc/consul.d
+chown --recursive vault:vault /etc/vault.d
 
 ## Nomad
 cp -r ./etc/nomad.d /etc/

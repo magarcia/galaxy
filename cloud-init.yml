@@ -1,0 +1,37 @@
+#cloud-config
+# vim: syntax=yaml
+#
+
+manage_etc_hosts: true
+
+resize_rootfs: true
+growpart:
+  mode: auto
+  devices: ["/"]
+  ignore_growroot_disabled: false
+
+users:
+  - name: magarcia
+    gecos: "magarcia"
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: users,docker,video
+    plain_text_passwd: hypriot
+    lock_passwd: false
+    chpasswd: { expire: True }
+    ssh_pwauth: True
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCUWi5qo4q27XJcMuHTzTWEg3V5t68AfkZjJQYpXBkGFRkogCNmnoUCunjP1TWbEv3uSZs6Y225YCeICvNldp4s+Ip8tsOJu7DCAt7ANUjZ8UqUGB3hj63ZkvMZQsrCjsV53NlJ9+Xb+H1teFEExzfT2LDfiA5rFoNmoPMFnrJPsri4XfD+4iiJjQ4o28X+Alu7SidxWYbfmbTGNbofoYXxlQWrqZEqlfY42AuFNa6WKckOUW3/4reJ2Jf3f+mMgr8V7rGLa7WCRrHzXcLNZyYncPqU4WfR9EaLzyOqQn2WAlIhmff4ehapXOltHyB3ebEK1eF5xIQDPTsI7hU5pJ7
+
+package_update: true
+package_upgrade: fasle
+package_reboot_if_required: true
+packages:
+  - jq
+  - unzip
+  - git
+  - libnss-mdns
+  - avahi-utils
+
+runcmd:
+  - curl -s -L https://raw.githubusercontent.com/magarcia/galaxy/master/build.sh | bash -s
