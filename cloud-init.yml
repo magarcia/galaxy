@@ -2,7 +2,7 @@
 # vim: syntax=yaml
 #
 
-hostname: node3
+# hostname: node5
 manage_etc_hosts: true
 
 resize_rootfs: true

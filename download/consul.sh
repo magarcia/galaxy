@@ -12,6 +12,9 @@ ARCH_CODE='386'
 if [[ $ARCH == *"arm"* ]]; then
     ARCH_CODE=$(readelf -a /proc/self/exe | grep -q -c Tag_ABI_VFP_args && echo "armhfv6" || echo "armelv5")
 fi
+if [[ $ARCH == "armv6l" ]]; then
+    ARCH_CODE="armelv5"
+fi
 if [[ $ARCH == *"aarch64"* ]]; then
     ARCH_CODE='arm64'
 fi
