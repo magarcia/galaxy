@@ -43,6 +43,7 @@ chmod 640 /etc/vault.d/*
 chown --recursive vault:vault /etc/vault.d
 
 ## Nomad
+useradd --system --home /etc/nomad.d --shell /bin/false nomad
 cp -r ./etc/nomad.d /etc/
 mkdir -p /var/nomad
 mv ./nomad /usr/local/bin/
